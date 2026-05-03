@@ -5,10 +5,10 @@ Overview
 This repository contains a specialized Power Query (M) script designed to sanitize and parse complex date strings. This is a common issue for data exported from modern SaaS platforms using updated Java (JDK 20+) or ICU library formatting.
 
 Technical Report: Date Column Transformation & Audit
-1. The Problem
+### 1. The Problem
 The Date column (e.g., Wed, Feb 1, 23 at 1:55: AM) was imported as a text string. Standard attempts to convert this to a "Date/Time" type in Power BI consistently failed with a DataFormat.Error. Manual fixes, such as replacing the word "at" and removing visible extra colons, did not resolve the issue, suggesting a hidden encoding problem within the string metadata.
 
-2. Identifying the "Invisible" Culprit
+### 2. Identifying the "Invisible" Culprit
 To identify why the system was still rejecting the data, I conducted a digital audit using Power Query's internal "microscope" functions:
 
 The Length Test: I utilized Text.Length and discovered the string was physically longer than it appeared on screen, confirming the existence of "ghost" characters.
@@ -19,7 +19,7 @@ The Unicode Audit: I applied the Character.ToNumber function to that list. Becau
 
 The Discovery: The audit revealed Unicode 8239 (a Narrow No-Break Space) hiding immediately after the colon. This character is not a standard keyboard space (code 32), which causes the standard Power BI date parser to fail.
 
-3. AI Collaboration & Troubleshooting
+### 3. AI Collaboration & Troubleshooting
 Since I am not an expert in M Language (Power Query’s functional syntax), I used an AI as a technical bridge. This was an iterative, collaborative process:
 
 Reporting Findings: I provided the AI with the specific Unicode ID (8239) and the identified patterns.
@@ -50,8 +50,8 @@ try
         FinalDate
 otherwise 
     null
-    ```
-    
+ ```
+
 ### 5. Troubleshooting & Adaptability**
 This solution is modular and can be adjusted if the data export format changes:
 
@@ -60,5 +60,5 @@ This solution is modular and can be adjusted if the data export format changes:
 
 *   **Targeting Other Artifacts:** If your audit reveals a different Unicode ID (e.g., `160` for a non-breaking space), simply update the numeric value within the `Character.FromNumber()` function.
 
-6. Conclusion
+### 6. Conclusion
 By combining manual forensic investigation with AI-assisted coding, I successfully transformed a corrupted dataset into a reliable format. This ensures that the report now supports all Time Intelligence features and automated date hierarchies in Power BI.
