@@ -1,5 +1,6 @@
-M-Language Timestamp Repair
-Project Goal: Resolving "DataFormat.Error" in Power BI caused by hidden Unicode 8239 artifacts in modern web service exports.
+# M-Language Timestamp Repair
+
+## Project Goal: Resolving "DataFormat.Error" in Power BI caused by hidden Unicode 8239 artifacts in modern web service exports.
 
 Overview
 This repository contains a specialized Power Query (M) script designed to sanitize and parse complex date strings. This is a common issue for data exported from modern SaaS platforms using updated Java (JDK 20+) or ICU library formatting.
@@ -52,7 +53,7 @@ otherwise
     null
  ```
 
-### 5. Troubleshooting & Adaptability**
+### 5. Troubleshooting & Adaptability
 This solution is modular and can be adjusted if the data export format changes:
 
 *   **Global Sanitization:** To target a hidden character anywhere in the string (regardless of what characters are next to it), use:  
