@@ -28,9 +28,8 @@ Refinement: I instructed the AI to provide a "surgical" version that wouldn't ac
 
 Result: The AI provided an advanced script that "rebuilds" the date string accurately, handling the years 2023 through 2026 dynamically.
 
-4### **4. The Solution (Implemented Code)**
+### 4. The Solution (Implemented Code)
 The following script was implemented to clean the data and perform the type conversion:
-
 ```powerquery
 try 
     let
@@ -51,7 +50,9 @@ try
         FinalDate
 otherwise 
     null
-### **5. Troubleshooting & Adaptability**
+    ```
+    
+### 5. Troubleshooting & Adaptability**
 This solution is modular and can be adjusted if the data export format changes:
 
 *   **Global Sanitization:** To target a hidden character anywhere in the string (regardless of what characters are next to it), use:  
