@@ -28,10 +28,10 @@ Refinement: I instructed the AI to provide a "surgical" version that wouldn't ac
 
 Result: The AI provided an advanced script that "rebuilds" the date string accurately, handling the years 2023 through 2026 dynamically.
 
-4. The Final Solution (Implemented Code)
+4### **4. The Solution (Implemented Code)**
 The following script was implemented to clean the data and perform the type conversion:
 
-Code snippet
+```powerquery
 try 
     let
         SourceText = [Date],
@@ -51,12 +51,13 @@ try
         FinalDate
 otherwise 
     null
-5. Troubleshooting & Adaptability
+### **5. Troubleshooting & Adaptability**
 This solution is modular and can be adjusted if the data export format changes:
 
-Global Sanitization: To target a hidden character anywhere in the string, use: Text.Replace(SourceText, Character.FromNumber(8239), " ").
+*   **Global Sanitization:** To target a hidden character anywhere in the string (regardless of what characters are next to it), use:  
+    `Text.Replace(SourceText, Character.FromNumber(8239), " ")`
 
-Other Artifacts: Simply update the numeric value within Character.FromNumber() to target other Unicode IDs (e.g., 160 or 8203).
+*   **Targeting Other Artifacts:** If your audit reveals a different Unicode ID (e.g., `160` for a non-breaking space), simply update the numeric value within the `Character.FromNumber()` function.
 
 6. Conclusion
 By combining manual forensic investigation with AI-assisted coding, I successfully transformed a corrupted dataset into a reliable format. This ensures that the report now supports all Time Intelligence features and automated date hierarchies in Power BI.
